@@ -5,9 +5,9 @@ I present MVVM graph application designed to simplify user interaction with grap
 
 ## Local start
 1. Clone the repository:
- ```git clone git@github.com:spbu-coding-2024/graphs-graphs-team-7.git ```
+ ```git clone git@github.com:VladimirKhmelev/Graphs-on-Kotlin.git ```
 2. Go to the project directory:
- ```cd graphs-graphs-team-7```
+ ```cd Graphs-on-Kotlin```
 3. Build the project with Gradle:
 ```./gradlew build```
 4. Run application:
