@@ -1,7 +1,8 @@
 plugins {
-    kotlin("jvm") version "1.9.23"
-    id("org.jetbrains.compose") version "1.6.11"
-    kotlin("plugin.serialization") version "1.9.23"
+    kotlin("jvm")
+    id("org.jetbrains.compose")
+    kotlin("plugin.compose")
+    kotlin("plugin.serialization")
     jacoco
 }
 
@@ -18,8 +19,8 @@ version = "1.0.0"
 
 repositories {
     mavenCentral()
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     google()
+    maven("https://packages.jetbrains.team/maven/p/kpm/public/")
 }
 
 configurations.all {
@@ -33,12 +34,11 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3")
-    //implementation("org.jetbrains.compose.runtime:runtime:1.6.11")
-    //implementation("org.jetbrains.compose.ui:ui:1.6.11")
-    //implementation("org.jetbrains.compose.foundation:foundation:1.6.11")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.0")
+
+    implementation("org.xerial:sqlite-jdbc:3.45.1.0")
 
     testImplementation(kotlin("test"))
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
