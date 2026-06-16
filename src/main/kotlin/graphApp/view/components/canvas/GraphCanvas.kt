@@ -30,7 +30,7 @@ fun GraphCanvas(
     settings: GraphSettings,
     modifier: Modifier = Modifier
 ) {
-    val currentSettings by rememberUpdatedState(settings) // текущие настройки вершин, ребер и стрелок
+    val currentSettings by rememberUpdatedState(settings)
 
     var time by remember { mutableStateOf(0f) }
     val textMeasurer = rememberTextMeasurer()
@@ -47,7 +47,6 @@ fun GraphCanvas(
             scale(scale, scale)
             translate(offset.x, offset.y)
         }) {
-            // Отрисовка рёбер
             edges.forEach { edge ->
                 val fromPos = vertices[edge.from]
                 val toPos = vertices[edge.to]
@@ -69,14 +68,12 @@ fun GraphCanvas(
                     val color = getVibrantColorForComponent(index)
                     component.forEach { vertex ->
                         vertices[vertex]?.let { pos ->
-                            // Яркий фон компоненты
                             drawCircle(
                                 color = color.copy(alpha = 0.2f),
                                 radius = 45f,
                                 center = Offset(pos.x, pos.y)
                             )
 
-                            // Яркая обводка вершины
                             drawCircle(
                                 color = color,
                                 radius = 30f,
@@ -88,7 +85,6 @@ fun GraphCanvas(
                 }
             }
 
-            // Отрисовка вершин
             vertices.forEach { (vertex, pos) ->
                 drawVertex(
                     vertex = vertex,

@@ -35,7 +35,6 @@ fun ControlPanel(
     onRedo: () -> Unit,
     canUndo: Boolean,
     canRedo: Boolean,
-    mergeMode: Boolean,
     onCustomize: () -> Unit,
     modifier: Modifier = Modifier,
 ) {

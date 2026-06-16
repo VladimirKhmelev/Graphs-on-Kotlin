@@ -45,10 +45,6 @@ open class Graph<T : Edge> {
         return edges.filter { it.from == vertex }
     }
 
-    open fun getEdgesTo(vertex: Vertex): List<T> {
-        return edges.filter { it.to == vertex }
-    }
-
     open fun getEdgeWeight(from: Vertex, to: Vertex): Double? {
         return null
     }
@@ -88,8 +84,6 @@ open class Graph<T : Edge> {
 
     fun getAllVertices(): Set<Vertex> = vertices.toSet()
     fun getAllEdges(): List<T> = edges.toList()
-    fun isEmpty(): Boolean = vertices.isEmpty()
-
 
     fun toSerializable(): SerializableGraph {
         return SerializableGraph(

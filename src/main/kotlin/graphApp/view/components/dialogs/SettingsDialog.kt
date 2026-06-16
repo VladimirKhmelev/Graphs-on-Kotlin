@@ -18,11 +18,9 @@ import graphApp.viewmodel.GraphViewModel
 @Composable
 fun SettingsDialog(
     viewModel: GraphViewModel,
-    settings: GraphSettings,
     onSettingsChange: (GraphSettings) -> Unit,
     onDismiss: () -> Unit
 ) {
-    // Локальная копия настроек для редактирования
     var localSettings by remember {
         mutableStateOf(viewModel.graphSettings.value.copy())
     }
@@ -34,7 +32,6 @@ fun SettingsDialog(
         title = { Text(tr("customize_settings")) },
         text = {
             Column {
-                // Вкладки настроек
                 TabRow(selectedTabIndex = selectedTab) {
                     Tab(
                         selected = selectedTab == 0,
@@ -57,7 +54,7 @@ fun SettingsDialog(
 
                 when (selectedTab) {
                     0 -> VertexSettingsPanel(localSettings) { newSettings ->
-                        localSettings = newSettings // Обновляем локальные настройки
+                        localSettings = newSettings
                     }
                     1 -> EdgeSettingsPanel(localSettings) { newSettings ->
                         localSettings = newSettings
@@ -70,8 +67,8 @@ fun SettingsDialog(
         },
         confirmButton = {
             Button(onClick = {
-                onSettingsChange(localSettings) // Передаём обновлённые локальные настройки
-                viewModel.updateSettings(localSettings) // Сохраняем в ViewModel
+                onSettingsChange(localSettings)
+                viewModel.updateSettings(localSettings)
                 onDismiss()
             }) {
                 Text(tr("save"))
@@ -97,7 +94,6 @@ fun ArrowSettingsPanel(
             modifier = Modifier.padding(bottom = 8.dp)
         )
 
-        // Настройка цвета
         Text(tr("arrow_color"), style = MaterialTheme.typography.titleMedium)
         ColorPicker(
             currentColor = settings.arrowColor,
@@ -108,7 +104,6 @@ fun ArrowSettingsPanel(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Настройка размера
         Text(tr("arrow_size"))
         Slider(
             value = settings.arrowSize,
@@ -122,7 +117,6 @@ fun ArrowSettingsPanel(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Настройка толщины
         Text(tr("arrow_thickness"))
         Slider(
             value = settings.arrowStrokeWidth,
@@ -171,7 +165,6 @@ fun EdgeSettingsPanel(
     onSettingsChange: (GraphSettings) -> Unit
 ) {
     Column {
-        // Переключатель анимации
         Row(verticalAlignment = Alignment.CenterVertically) {
             Checkbox(
                 checked = settings.animatedEdges,
@@ -182,7 +175,6 @@ fun EdgeSettingsPanel(
             Text(tr("animated_edges"))
         }
 
-        // Цвет рёбер
         Text(tr("edge_color"), style = MaterialTheme.typography.titleMedium)
         ColorPicker(
             currentColor = settings.edgeColor,
@@ -193,7 +185,6 @@ fun EdgeSettingsPanel(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Ширина рёбер
         Text(tr("edge_width"))
         Slider(
             value = settings.edgeWidth,
@@ -205,7 +196,6 @@ fun EdgeSettingsPanel(
         )
         Text("${settings.edgeWidth.toInt()}px")
 
-        // Скорость анимации (только если анимация включена)
         if (settings.animatedEdges) {
             Spacer(modifier = Modifier.height(16.dp))
             Text(tr("animation_speed"), style = MaterialTheme.typography.titleMedium)
@@ -247,12 +237,10 @@ fun ColorPicker(
     var green by remember { mutableStateOf((currentColor.green * 255).toInt()) }
     var blue by remember { mutableStateOf((currentColor.blue * 255).toInt()) }
 
-    // Обновляем цвет при изменении ползунков
     LaunchedEffect(red, green, blue) {
         onColorChange(Color(red, green, blue))
     }
 
-    // Предпросмотр цвета
     Box(
         modifier = Modifier
             .fillMaxWidth()

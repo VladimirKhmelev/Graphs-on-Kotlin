@@ -15,7 +15,7 @@ import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
 
-fun DrawScope.getVertexColor(
+fun getVertexColor(
     vertex: Vertex,
     selectedVertex: Vertex?,
     hoveredVertex: Vertex?,
@@ -23,7 +23,7 @@ fun DrawScope.getVertexColor(
     algorithmResult: AlgorithmResult?,
     dijkstraStart: Vertex?,
     dijkstraEnd: Vertex?,
-    baseColor: Color // Базовый цвет из настроек
+    baseColor: Color
 ): Color {
     return when {
         vertex == dijkstraStart -> Color.Green
@@ -32,7 +32,7 @@ fun DrawScope.getVertexColor(
         vertex == selectedVertex -> Color.Magenta
         vertex == hoveredVertex -> Color.Cyan
         vertex == firstVertexForMerge -> Color.Blue
-        else -> baseColor // Используем базовый цвет из настроек
+        else -> baseColor
     }
 }
 
@@ -162,9 +162,9 @@ fun DrawScope.drawEdge(
         drawCustomArrow(
             center = adjustedEnd,
             angle = angle,
-            size = settings.arrowSize, // Используем настройки размера
-            color = settings.arrowColor, // Используем настройки цвета
-            strokeWidth = settings.arrowStrokeWidth // Используем настройки толщины
+            size = settings.arrowSize,
+            color = settings.arrowColor,
+            strokeWidth = settings.arrowStrokeWidth
         )
     }
 }
@@ -188,7 +188,6 @@ private fun DrawScope.drawCustomArrow(
             center.y - size * sin(angle - (Math.PI / 6).toFloat())
         )
     }
-    // Используем переданный цвет
     drawPath(path, color, style = Stroke(width = strokeWidth))
 }
 
