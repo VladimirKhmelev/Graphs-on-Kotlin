@@ -6,12 +6,6 @@ open class DirectedGraph : Graph<DirectedEdge>() {
         addEdge(DirectedEdge(from, to))
     }
 
-    override fun getNeighbors(vertex: Vertex): List<Vertex> {
-        return edges
-            .filter { it.from == vertex }
-            .map { it.to }
-    }
-
     fun transpose(): DirectedGraph {
         val transposed = DirectedGraph()
         getAllVertices().forEach { transposed.addVertex(it) }

@@ -56,8 +56,7 @@ open class Graph<T : Edge> {
 
         val vertexMap = mutableMapOf<Vertex, Vertex>()
         this.vertices.forEach { oldVertex ->
-            val newVertex = Vertex(oldVertex.id).apply {
-            }
+            val newVertex = Vertex(oldVertex.id)
             vertexMap[oldVertex] = newVertex
             newGraph.addVertex(newVertex)
         }
