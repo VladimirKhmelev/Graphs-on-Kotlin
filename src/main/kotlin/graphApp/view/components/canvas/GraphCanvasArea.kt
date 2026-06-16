@@ -282,19 +282,6 @@ fun GraphCanvasArea(
             )
         }
 
-        if (viewModel.dHintVisible) {
-            Text(
-                text = viewModel.dHintMessage,
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .padding(16.dp)
-                    .background(Color.Black.copy(alpha = 0.7f))
-                    .padding(8.dp),
-                color = Color.White,
-                fontSize = 18.sp
-            )
-        }
-
         if (viewModel.showUndoRedoEffect.value) {
             Box(
                 modifier = Modifier
