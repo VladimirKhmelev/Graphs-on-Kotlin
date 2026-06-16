@@ -4,6 +4,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.window.FrameWindowScope
 import graphApp.model.algorithms.AlgorithmType
 import graphApp.model.graph.Vertex
+import graphApp.view.MainDialogsState
 import graphApp.view.components.Localization
 import graphApp.viewmodel.AlgorithmResult
 import graphApp.viewmodel.GraphViewModel

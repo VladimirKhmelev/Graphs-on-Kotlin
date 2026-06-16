@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.focus.FocusRequester
+import graphApp.model.graph.Edge
 import graphApp.model.graph.Vertex
 
 class MainViewState {
@@ -14,4 +15,17 @@ class MainViewState {
     var dijkstraEnd by mutableStateOf<Vertex?>(null)
     var selectionMode by mutableStateOf<SelectionMode>(SelectionMode.NONE)
     val focusRequester = FocusRequester()
+}
+
+class MainDialogsState {
+    var showAlgorithmDialog by mutableStateOf(false)
+    var showEdgeDialog by mutableStateOf(false)
+    var showSaveFormatDialog by mutableStateOf(false)
+    var showOpenDialog by mutableStateOf(false)
+    var showGenerateDialog by mutableStateOf(false)
+    var showHelpDialog by mutableStateOf(false)
+    var showSettingsDialog by mutableStateOf(false)
+    var showDatabaseDialog by mutableStateOf(false)
+    var showEdgeEditDialog by mutableStateOf(false)
+    var selectedEdge by mutableStateOf<Edge?>(null)
 }

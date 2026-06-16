@@ -12,7 +12,6 @@ import androidx.compose.ui.window.FrameWindowScope
 import graphApp.view.components.Localization
 import graphApp.view.components.canvas.GraphCanvasArea
 import graphApp.view.components.dialogs.MainDialogs
-import graphApp.view.components.dialogs.MainDialogsState
 import graphApp.view.components.panels.ControlPanel
 import graphApp.view.components.panels.ZoomControls
 import graphApp.view.components.topbar.MainTopBar
