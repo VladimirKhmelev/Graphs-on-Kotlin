@@ -28,7 +28,7 @@ object GraphGeneratorService {
         repeat(vertexCount) { i ->
             val vertex = Vertex("V${i + 1}")
             addVertex(vertex)
-            setPosition(vertex, Random.nextInt(100, 700).toFloat(), Random.nextInt(100, 600).toFloat())
+            setPosition(vertex, Random.nextInt(40, 760).toFloat(), Random.nextInt(50, 650).toFloat())
         }
         val verticesList = vertices.toList()
         for (i in verticesList.indices) {
@@ -47,7 +47,7 @@ object GraphGeneratorService {
             repeat(vertexCount) { i ->
                 val vertex = Vertex("V${i + 1}")
                 addVertex(vertex)
-                setPosition(vertex, Random.nextInt(100, 700).toFloat(), Random.nextInt(100, 600).toFloat())
+                setPosition(vertex, Random.nextInt(40, 760).toFloat(), Random.nextInt(50, 650).toFloat())
             }
             val verticesList = vertices.toList()
             if (verticesList.isEmpty()) return@apply
@@ -89,7 +89,7 @@ object GraphGeneratorService {
         repeat(vertexCount) { i ->
             val vertex = Vertex("V${i + 1}")
             addVertex(vertex)
-            setPosition(vertex, Random.nextInt(100, 700).toFloat(), Random.nextInt(100, 600).toFloat())
+            setPosition(vertex, Random.nextInt(40, 760).toFloat(), Random.nextInt(50, 650).toFloat())
         }
         val verticesList = vertices.toList()
         for (i in verticesList.indices) {

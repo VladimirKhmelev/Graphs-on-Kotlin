@@ -15,6 +15,7 @@ class MainViewState {
     var dijkstraEnd by mutableStateOf<Vertex?>(null)
     var selectionMode by mutableStateOf<SelectionMode>(SelectionMode.NONE)
     val focusRequester = FocusRequester()
+    var sidebarExpanded by mutableStateOf(true)
 }
 
 class MainDialogsState {

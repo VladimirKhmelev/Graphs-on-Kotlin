@@ -1,7 +1,11 @@
 package graphApp.view
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -49,21 +53,59 @@ fun FrameWindowScope.MainView(
                     onOpenFile = { dialogs.showOpenDialog = true },
                     onSaveFile = { dialogs.showSaveFormatDialog = true },
                     onDatabase = { dialogs.showDatabaseDialog = true },
-                    canUndo = viewModel.canUndo,
-                    onUndo = { viewModel.undo() },
-                    canRedo = viewModel.canRedo,
-                    onRedo = { viewModel.redo() },
+                    onHelp = { dialogs.showHelpDialog = true },
                     onNewWindow = onNewWindow,
                     onCloseWindow = onCloseWindow
                 )
-            },
-            content = { padding ->
-                Box(
+            }
+        ) { padding ->
+            Row(
+                modifier = Modifier
+                    .padding(padding)
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background)
+            ) {
+                // Sidebar with toggle
+                Column(
                     modifier = Modifier
-                        .padding(padding)
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background)
+                        .fillMaxHeight()
+                        .background(MaterialTheme.colorScheme.surface)
                 ) {
+                    IconButton(
+                        onClick = { s.sidebarExpanded = !s.sidebarExpanded },
+                        modifier = Modifier.padding(4.dp)
+                    ) {
+                        Icon(
+                            imageVector = if (s.sidebarExpanded) Icons.AutoMirrored.Filled.ArrowBack
+                                          else Icons.AutoMirrored.Filled.ArrowForward,
+                            contentDescription = null
+                        )
+                    }
+                    AnimatedVisibility(visible = s.sidebarExpanded) {
+                        ControlPanel(
+                            onAddVertex = { viewModel.addVertexAtPosition(0f, 0f) },
+                            onAddEdge = { dialogs.showEdgeDialog = true },
+                            onAlgorithms = { dialogs.showAlgorithmDialog = true },
+                            onClear = { viewModel.clearGraph() },
+                            onGenerate = { dialogs.showGenerateDialog = true },
+                            onUndo = { viewModel.undo() },
+                            onRedo = { viewModel.redo() },
+                            canUndo = viewModel.canUndo,
+                            canRedo = viewModel.canRedo,
+                            onSetDijkstraStart = { s.selectionMode = SelectionMode.DIJKSTRA_START },
+                            onSetDijkstraEnd = { s.selectionMode = SelectionMode.DIJKSTRA_END },
+                            dijkstraStart = s.dijkstraStart,
+                            dijkstraEnd = s.dijkstraEnd,
+                            onCustomize = { dialogs.showSettingsDialog = true },
+                            modifier = Modifier
+                                .width(210.dp)
+                                .fillMaxHeight()
+                        )
+                    }
+                }
+
+                // Canvas area
+                Box(modifier = Modifier.weight(1f).fillMaxHeight()) {
                     GraphCanvasArea(
                         viewModel = viewModel,
                         mergeMode = s.mergeMode,
@@ -81,31 +123,6 @@ fun FrameWindowScope.MainView(
                         },
                         modifier = Modifier.fillMaxSize()
                     )
-
-                    ControlPanel(
-                        onAddVertex = { viewModel.addVertexAtPosition(0f, 0f) },
-                        onAddEdge = { dialogs.showEdgeDialog = true },
-                        onAlgorithms = { dialogs.showAlgorithmDialog = true },
-                        onClear = { viewModel.clearGraph() },
-                        onMerge = { s.mergeMode = !s.mergeMode },
-                        onGenerate = { dialogs.showGenerateDialog = true },
-                        onHelp = { dialogs.showHelpDialog = true },
-                        onUndo = { viewModel.undo() },
-                        onRedo = { viewModel.redo() },
-                        canUndo = viewModel.canUndo,
-                        canRedo = viewModel.canRedo,
-                        onSetDijkstraStart = { s.selectionMode = SelectionMode.DIJKSTRA_START },
-                        onSetDijkstraEnd = { s.selectionMode = SelectionMode.DIJKSTRA_END },
-                        dijkstraStart = s.dijkstraStart,
-                        dijkstraEnd = s.dijkstraEnd,
-                        onCustomize = { dialogs.showSettingsDialog = true },
-                        modifier = Modifier
-                            .width(200.dp)
-                            .fillMaxHeight()
-                            .background(MaterialTheme.colorScheme.surface)
-                            .padding(8.dp)
-                    )
-
                     ZoomControls(
                         scale = viewModel.scale,
                         onZoomIn = { viewModel.handleZoom(0.1f) },
@@ -120,6 +137,6 @@ fun FrameWindowScope.MainView(
                     )
                 }
             }
-        )
+        }
     }
 }

@@ -16,6 +16,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.input.key.*
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.isSecondaryPressed
@@ -62,6 +63,9 @@ fun GraphCanvasArea(
     Box(
         modifier = modifier
             .background(if (mergeMode) Color.LightGray.copy(alpha = 0.3f) else Color.Transparent)
+            .onSizeChanged { size ->
+                viewModel.setCanvasSize(size.width.toFloat(), size.height.toFloat())
+            }
 
             .pointerInput(Unit) {
                 awaitPointerEventScope {
@@ -148,7 +152,7 @@ fun GraphCanvasArea(
                 }
             }
 
-            .pointerInput(vMode, mergeMode) {
+            .pointerInput(vMode, mergeMode, selectionMode) {
                 detectTapGestures(
                     onTap = { offset ->
                         focusRequester.requestFocus()
@@ -252,6 +256,23 @@ fun GraphCanvasArea(
         if (vHintVisible) {
             Text(
                 text = vHintMessage,
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(16.dp)
+                    .background(Color.Black.copy(alpha = 0.7f))
+                    .padding(8.dp),
+                color = Color.White,
+                fontSize = 18.sp
+            )
+        }
+
+        if (selectionMode != SelectionMode.NONE) {
+            Text(
+                text = when (selectionMode) {
+                    SelectionMode.DIJKSTRA_START -> tr("start_vert")
+                    SelectionMode.DIJKSTRA_END -> tr("end_vert")
+                    SelectionMode.NONE -> ""
+                },
                 modifier = Modifier
                     .align(Alignment.TopCenter)
                     .padding(16.dp)

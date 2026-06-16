@@ -35,9 +35,9 @@ fun GraphCanvas(
     var time by remember { mutableStateOf(0f) }
     val textMeasurer = rememberTextMeasurer()
 
-    LaunchedEffect(Unit) {
-        while (true) {
-            delay(1)
+    LaunchedEffect(settings.animatedEdges) {
+        while (settings.animatedEdges) {
+            delay(16) // ~60fps
             time += 2f
         }
     }

@@ -38,6 +38,11 @@ class GraphViewModel {
 
     var scale by mutableStateOf(1f)
     var offset by mutableStateOf(Offset.Zero)
+    private var canvasSize = Offset(800f, 600f)
+
+    fun setCanvasSize(width: Float, height: Float) {
+        canvasSize = Offset(width, height)
+    }
 
     private val _algorithmResult = mutableStateOf<AlgorithmResult?>(null)
     val algorithmResult: State<AlgorithmResult?> get() = _algorithmResult
@@ -215,7 +220,7 @@ class GraphViewModel {
         }
 
         val maxDim = maxOf(maxX - minX, maxY - minY, 1f)
-        scale = minOf(1f, 800f / maxDim)
+        scale = minOf(1f, minOf(canvasSize.x, canvasSize.y) * 0.75f / maxDim)
 
         val centerX = (minX + maxX) / 2
         val centerY = (minY + maxY) / 2
@@ -223,6 +228,8 @@ class GraphViewModel {
         positions.forEach { (vertex, pos) ->
             _graph.value?.setPosition(vertex, (pos.x - centerX) * scale, (pos.y - centerY) * scale)
         }
+
+        offset = Offset(canvasSize.x / 2, canvasSize.y / 2)
     }
 
     fun handlePan(dx: Float, dy: Float) {

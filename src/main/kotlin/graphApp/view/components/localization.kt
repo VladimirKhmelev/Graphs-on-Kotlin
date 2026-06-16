@@ -38,7 +38,7 @@ object Localization {
             "dijkstra_vertices_not_selected" to "Select start and end vertices for Dijkstra",
             "help_v_mode" to "• V: activate vertex connection mode",
             "help_esc" to "• Esc: cancels the current action",
-            "help_add_vertex" to "• Add Vertex or LMB + RMB: add a vertex",
+            "help_add_vertex" to "• Add Vertex button: add vertex at center",
             "help_move_vertex" to "• LMB on a vertex: move vertices",
             "help_zoom" to "• Wheel: zoom",
             "help_undo_redo" to "• Ctrl+Z/Ctrl+Y and the buttons below: undo/redo actions",
@@ -121,7 +121,18 @@ object Localization {
             "db_name_empty" to "Please enter a name",
             "db_empty" to "No saved graphs",
             "db_delete" to "Delete",
-            "button_database" to "Database"
+            "button_database" to "Database",
+            "section_graph" to "Graph",
+            "section_algorithms" to "Algorithms",
+            "section_view" to "View",
+            "help_section_editing" to "Editing",
+            "help_section_connections" to "Connections",
+            "help_section_navigation" to "Navigation",
+            "help_rmb" to "• RMB on canvas: add vertex at cursor",
+            "help_double_click" to "• Double-click on edge: edit weight / direction",
+            "file_open_json" to "Open JSON / CSV",
+            "file_save_json" to "Save JSON / CSV",
+            "file_database" to "Database (SQLite)"
         ),
 
         "ru" to mapOf(
@@ -140,7 +151,7 @@ object Localization {
             "dijkstra_vertices_not_selected" to "Выберите начальную и конечную вершины для алгоритма Дейкстры",
             "help_v_mode" to "• V: активирует режим соединения вершин",
             "help_esc" to "• Esc: отменяет текущее действие",
-            "help_add_vertex" to "• Add Vertex или ЛКМ + ПКМ: добавить вершину",
+            "help_add_vertex" to "• Кнопка добавить вершину: добавить вершину в центр",
             "help_move_vertex" to "• ЛКМ по вершине: перемещение вершин",
             "help_zoom" to "• Колёсико: масштабирование",
             "help_undo_redo" to "• Ctrl+Z/Ctrl+Y и кнопки снизу: отмена/повтор действий",
@@ -240,7 +251,18 @@ object Localization {
             "db_name_empty" to "Введите название",
             "db_empty" to "Нет сохранённых графов",
             "db_delete" to "Удалить",
-            "button_database" to "База данных"
+            "button_database" to "База данных",
+            "section_graph" to "Граф",
+            "section_algorithms" to "Алгоритмы",
+            "section_view" to "Вид",
+            "help_section_editing" to "Редактирование",
+            "help_section_connections" to "Соединения",
+            "help_section_navigation" to "Навигация",
+            "help_rmb" to "• ПКМ на холсте: добавить вершину под курсором",
+            "help_double_click" to "• Двойной клик на ребро: изменить вес / направление",
+            "file_open_json" to "Открыть JSON / CSV",
+            "file_save_json" to "Сохранить JSON / CSV",
+            "file_database" to "База данных (SQLite)"
         )
     )
 
