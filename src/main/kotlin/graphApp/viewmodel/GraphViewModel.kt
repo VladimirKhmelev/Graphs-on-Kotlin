@@ -7,6 +7,8 @@ import graphApp.model.algorithms.connectivity.Kosaraju
 import graphApp.model.algorithms.layout.ForceAtlas2
 import graphApp.model.algorithms.shortestpath.Dijkstra
 import graphApp.model.graph.*
+import graphApp.model.graph.repository.GraphRepository
+import graphApp.model.graph.repository.SQLiteGraphRepository
 import graphApp.model.graph.serialization.SerializableGraph
 import graphApp.view.components.Localization
 import graphApp.view.components.dialogs.GraphType
@@ -703,6 +705,43 @@ class GraphViewModel {
 
         } catch (e: Exception) {
             println("Ошибка импорта CSV: ${e.message}")
+        }
+    }
+
+    // --- SQLite ---
+
+    private val dbRepository: GraphRepository = SQLiteGraphRepository()
+
+    fun saveToDatabase(name: String) {
+        val g = graph.value ?: return
+        try {
+            @Suppress("UNCHECKED_CAST")
+            dbRepository.save(g, name)
+        } catch (e: Exception) {
+            println("Ошибка сохранения в БД: ${e.message}")
+        }
+    }
+
+    fun loadFromDatabase(name: String) {
+        try {
+            val loaded = dbRepository.load(name) ?: return
+            _graph.value = loaded
+            val maxId = loaded.vertices.mapNotNull {
+                it.id.removePrefix("V").toIntOrNull()
+            }.maxOrNull() ?: 0
+            vertexCounter = maxId
+            centerAndScaleGraph()
+        } catch (e: Exception) {
+            println("Ошибка загрузки из БД: ${e.message}")
+        }
+    }
+
+    fun listDatabaseGraphs(): List<String> =
+        try { dbRepository.listGraphs() } catch (_: Exception) { emptyList() }
+
+    fun deleteFromDatabase(name: String) {
+        try { dbRepository.delete(name) } catch (e: Exception) {
+            println("Ошибка удаления из БД: ${e.message}")
         }
     }
 }

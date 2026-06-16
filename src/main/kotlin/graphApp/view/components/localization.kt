@@ -111,8 +111,19 @@ object Localization {
             "animation_speed" to "Animation Speed",
             "current_speed" to "Current: %.1fx",
             "slow" to "Slow",
-            "fast" to "Fast"
+            "fast" to "Fast",
+
+            // DatabaseDialog
+            "db_title" to "Database",
+            "db_save" to "Save",
+            "db_load" to "Load",
+            "db_name" to "Graph name",
+            "db_name_empty" to "Please enter a name",
+            "db_empty" to "No saved graphs",
+            "db_delete" to "Delete",
+            "button_database" to "Database"
         ),
+
         "ru" to mapOf(
             //GraphViewModel
             "layout_suc" to "Раскладка графа применена",
@@ -219,7 +230,17 @@ object Localization {
             "animation_speed" to "Скорость анимации",
             "current_speed" to "Текущая: %.1fх",
             "slow" to "Медленно",
-            "fast" to "Быстро"
+            "fast" to "Быстро",
+
+            // DatabaseDialog
+            "db_title" to "База данных",
+            "db_save" to "Сохранить",
+            "db_load" to "Загрузить",
+            "db_name" to "Название графа",
+            "db_name_empty" to "Введите название",
+            "db_empty" to "Нет сохранённых графов",
+            "db_delete" to "Удалить",
+            "button_database" to "База данных"
         )
     )
 

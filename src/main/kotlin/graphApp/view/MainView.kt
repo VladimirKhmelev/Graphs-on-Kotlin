@@ -72,6 +72,7 @@ fun FrameWindowScope.MainView(
     var showEdgeEditDialog by remember { mutableStateOf(false) } // Диалог для изменения веса ребра
     var currentLanguage by remember { mutableStateOf("en") } // Выбранный язык
     var showSettingsDialog by remember { mutableStateOf(false) } // Диалог настройки графа - ребра и вершины
+    var showDatabaseDialog by remember { mutableStateOf(false) } // Диалог базы данных
 
     // Состояния для V-режима (соединение вершин)
     var vMode by remember { mutableStateOf(false) } // Активность режима
@@ -325,6 +326,9 @@ fun FrameWindowScope.MainView(
                         }
                         IconButton(onClick = { showSaveFormatDialog = true }) {
                             Icon(Icons.Filled.Save, "Save")
+                        }
+                        IconButton(onClick = { showDatabaseDialog = true }) {
+                            Icon(Icons.Filled.Storage, contentDescription = tr("button_database"))
                         }
                         Box {
                             IconButton(onClick = { editMenuExpanded = true }) {
@@ -726,6 +730,13 @@ fun FrameWindowScope.MainView(
                     }
                     showAlgorithmDialog = false
                 }
+            )
+        }
+
+        if (showDatabaseDialog) {
+            DatabaseDialog(
+                viewModel = viewModel,
+                onDismiss = { showDatabaseDialog = false }
             )
         }
 
