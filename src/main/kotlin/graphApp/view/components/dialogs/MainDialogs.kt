@@ -150,7 +150,6 @@ fun FrameWindowScope.MainDialogs(
     if (state.showSettingsDialog) {
         SettingsDialog(
             viewModel = viewModel,
-            settings = viewModel.graphSettings.value,
             onSettingsChange = { viewModel.updateSettings(it) },
             onDismiss = { state.showSettingsDialog = false }
         )
